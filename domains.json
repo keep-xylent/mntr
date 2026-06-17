@@ -1,0 +1,12 @@
+[
+  {
+    "domain": "xlnt.my.id",
+    "name": "Main Site",
+    "type": "root"
+  },
+  {
+    "domain": "eldorian.xlnt.my.id",
+    "name": "Eldorian Subdomain",
+    "type": "subdomain"
+  }
+]

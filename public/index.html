@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>XLNT MNTR.</title>
+    <meta name="description" content="Minimalist real-time status and network monitor for xlnt.my.id and its subdomains.">
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <link rel="stylesheet" href="index.css">
+</head>
+<body>
+    <div class="glow-bg"></div>
+    <div class="container">
+        <!-- Header -->
+        <header>
+            <div class="logo-area">
+                <span class="logo-dot"></span>
+                <h1>XLNT MNTR<span class="gradient-dot">.</span></h1>
+            </div>
+            
+            <div class="actions-area">
+                <div class="auto-refresh-control">
+                    <label class="switch">
+                        <input type="checkbox" id="auto-refresh-toggle" checked>
+                        <span class="slider"></span>
+                    </label>
+                    <span class="auto-refresh-label">Auto-refresh (30s)</span>
+                </div>
+                
+                <button id="refresh-all-btn" class="btn btn-primary" title="Refresh all monitors">
+                    <i data-lucide="refresh-cw"></i>
+                    <span>Refresh All</span>
+                </button>
+                <button id="scan-btn" class="btn btn-secondary" title="Scan for active subdomains">
+                    <i data-lucide="search-code"></i>
+                    <span>Scan DNS</span>
+                </button>
+            </div>
+        </header>
+
+        <!-- Stats Grid -->
+        <section class="stats-grid">
+            <div class="stat-card">
+                <div class="stat-icon-wrapper blue">
+                    <i data-lucide="globe"></i>
+                </div>
+                <div class="stat-info">
+                    <span class="stat-label">Total Monitored</span>
+                    <span class="stat-value" id="stat-total">-</span>
+                </div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-icon-wrapper green">
+                    <i data-lucide="check-circle-2"></i>
+                </div>
+                <div class="stat-info">
+                    <span class="stat-label">Operational</span>
+                    <span class="stat-value text-success" id="stat-online">-</span>
+                </div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-icon-wrapper amber">
+                    <i data-lucide="zap"></i>
+                </div>
+                <div class="stat-info">
+                    <span class="stat-label">Avg Response</span>
+                    <span class="stat-value" id="stat-latency">-</span>
+                </div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-icon-wrapper purple">
+                    <i data-lucide="clock"></i>
+                </div>
+                <div class="stat-info">
+                    <span class="stat-label">Last Updated</span>
+                    <span class="stat-value" id="stat-updated">-</span>
+                </div>
+            </div>
+        </section>
+
+        <!-- Control Bar & Add Domain -->
+        <section class="control-bar">
+            <div class="section-title">
+                <h2>Monitors</h2>
+                <span class="badge" id="monitors-count">0 active</span>
+            </div>
+            
+            <form id="add-domain-form" class="add-domain-form">
+                <div class="input-group">
+                    <span class="input-prefix">https://</span>
+                    <input type="text" id="domain-input" placeholder="subdomain.xlnt.my.id" required>
+                    <button type="submit" class="btn btn-accent">
+                        <i data-lucide="plus"></i>
+                        <span>Add</span>
+                    </button>
+                </div>
+            </form>
+        </section>
+
+        <!-- Main Monitors Grid -->
+        <main class="monitors-grid" id="monitors-container">
+            <!-- Cards will be dynamically inserted here -->
+            <div class="initial-loader">
+                <div class="spinner"></div>
+                <p>Loading monitors and establishing secure handshakes...</p>
+            </div>
+        </main>
+
+        <!-- Footer -->
+        <footer>
+            <p>&copy; 2026 XLNT MNTR. Powered by Node.js &amp; Express. All checks run directly from monitoring server.</p>
+        </footer>
+    </div>
+
+    <!-- Notification Toast -->
+    <div id="toast-container" class="toast-container"></div>
+
+    <script src="app.js"></script>
+</body>
+</html>
